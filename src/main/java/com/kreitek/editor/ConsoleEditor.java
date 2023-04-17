@@ -20,7 +20,6 @@ public class ConsoleEditor implements Editor {
 
     private final CommandFactory commandFactory = new CommandFactory();
     private ArrayList<String> documentLines = new ArrayList<String>();
-    private String format;
     private Printer print = new PrintConsole();
 
     @Override
@@ -45,8 +44,8 @@ public class ConsoleEditor implements Editor {
         if (textLines.size() > 0){
             setTextColor(TEXT_YELLOW);
             try {
-                PrintFormat printformat = new PrintFormat(documentLines);
-                printformat.printText();
+                Formatter format = new PrintFormat(documentLines);
+                format.printText();
             } catch (FormatException e) {
                 throw new RuntimeException(e);
             }

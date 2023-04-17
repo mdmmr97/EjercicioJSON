@@ -1,11 +1,14 @@
-package com.kreitek.editor;
+package com.kreitek.editor.print;
 
+import com.kreitek.editor.FormatException;
+import com.kreitek.editor.Singleton;
+import com.kreitek.editor.print.Formatter;
 import com.kreitek.editor.print.PrintConsole;
 import com.kreitek.editor.print.Printer;
 
 import java.util.ArrayList;
 
-public class PrintFormat implements Formatter{
+public class PrintFormat implements Formatter {
     private ArrayList<String> textLines;
     private String format;
     private Printer print = new PrintConsole();

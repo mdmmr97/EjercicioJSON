@@ -1,7 +1,9 @@
 package com.kreitek.editor;
 
 import com.kreitek.editor.commands.CommandFactory;
+import com.kreitek.editor.print.Formatter;
 import com.kreitek.editor.print.PrintConsole;
+import com.kreitek.editor.print.PrintFormat;
 import com.kreitek.editor.print.Printer;
 
 import java.util.ArrayList;

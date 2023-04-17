@@ -19,6 +19,7 @@ public class ConsoleEditor implements Editor {
     private final CommandFactory commandFactory = new CommandFactory();
     private ArrayList<String> documentLines = new ArrayList<String>();
     private String format;
+    private Printer print = new PrintConsole();
     public ConsoleEditor(String format) {this.format = format;}
 
     @Override
@@ -42,7 +43,7 @@ public class ConsoleEditor implements Editor {
     private void showDocumentLines(ArrayList<String> textLines) {
         if (textLines.size() > 0){
             setTextColor(TEXT_YELLOW);
-            printLnToConsole("START DOCUMENT ==>");
+           /* printLnToConsole("START DOCUMENT ==>");
             for (int index = 0; index < textLines.size(); index++) {
                 StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.append("[");
@@ -52,38 +53,30 @@ public class ConsoleEditor implements Editor {
                 printLnToConsole(stringBuilder.toString());
             }
             printLnToConsole("<== END DOCUMENT");
-            setTextColor(TEXT_RESET);
+            */setTextColor(TEXT_RESET);
         }
     }
 
     private String waitForNewCommand() {
-        printToConsole("Enter a command : ");
+        print.printToConsole("Enter a command : ");
         Scanner scanner = new Scanner(System. in);
         return scanner.nextLine();
     }
 
     private void showHelp() {
-        printLnToConsole("To add new line -> a \"your text\"");
-        printLnToConsole("To update line  -> u [line number] \"your text\"");
-        printLnToConsole("To delete line  -> d [line number]");
+        print.printLnToConsole("To add new line -> a \"your text\"");
+        print.printLnToConsole("To update line  -> u [line number] \"your text\"");
+        print.printLnToConsole("To delete line  -> d [line number]");
     }
 
     private void printErrorToConsole(String message) {
         setTextColor(TEXT_RED);
-        printToConsole(message);
+        print.printToConsole(message);
         setTextColor(TEXT_RESET);
     }
 
     private void setTextColor(String color) {
         System.out.println(color);
-    }
-
-    private void printLnToConsole(String message) {
-        System.out.println(message);
-    }
-
-    private void printToConsole(String message) {
-        System.out.print(message);
     }
 
 }

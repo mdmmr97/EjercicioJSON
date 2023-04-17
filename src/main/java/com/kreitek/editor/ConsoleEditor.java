@@ -18,6 +18,8 @@ public class ConsoleEditor implements Editor {
 
     private final CommandFactory commandFactory = new CommandFactory();
     private ArrayList<String> documentLines = new ArrayList<String>();
+    private String format;
+    public ConsoleEditor(String format) {this.format = format;}
 
     @Override
     public void run() {

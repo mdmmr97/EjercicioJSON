@@ -1,4 +1,4 @@
-package com.kreitek.editor;
+package com.kreitek.editor.print;
 
 public interface Printer {
     void printToConsole(String mesagge);

@@ -1,24 +1,27 @@
 package com.kreitek.editor;
 
+import com.kreitek.editor.print.PrintConsole;
+import com.kreitek.editor.print.Printer;
+
 import java.util.ArrayList;
 
-public abstract class PrintFormat{
-    private ArrayList<String> documentLines;
+public class PrintFormat {
+    private ArrayList<String> textLines;
     private String format;
+    private Printer print = new PrintConsole();
 
-
-    public PrintFormat(String format, ArrayList<String> documentLines) {
-        setFormat(format);
+    public PrintFormat(ArrayList<String> documentLines) {
+        setFormat();
         setDocumentLines(documentLines);
     }
     private void setDocumentLines(ArrayList<String> documentLines) {
-        this.documentLines = documentLines;
+        this.textLines = documentLines;
     }
-    private void setFormat(String format) {
-        this.format = format;
+    private void setFormat() {
+        this.format = Singleton.getFormat();
     }
 
-    public void printFormat() throws FormatException {
+    public void printText() throws FormatException {
         switch (format){
             case "text"-> textFormat();
             case "json"-> jsonFormat();
@@ -27,11 +30,31 @@ public abstract class PrintFormat{
     }
 
     private void jsonFormat() {
+
+        print.printLnToConsole("{\n" + "  \"doc\": [");
+        for (int index = 0; index < textLines.size(); index++) {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("    {\"line\":\"");
+            stringBuilder.append(index);
+            stringBuilder.append("\",\"text\":\"");
+            stringBuilder.append(textLines.get(index));
+            stringBuilder.append("\"}");
+            if (index != textLines.size()-1) stringBuilder.append(",");
+            print.printLnToConsole(stringBuilder.toString());
+        }
+        print.printLnToConsole("  ]\n" + "}");
     }
 
     private void textFormat() {
-    }
-    private void printLines(){
-
+        print.printLnToConsole("START DOCUMENT ==>");
+        for (int index = 0; index < textLines.size(); index++) {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("[");
+            stringBuilder.append(index);
+            stringBuilder.append("] ");
+            stringBuilder.append(textLines.get(index));
+            print.printLnToConsole(stringBuilder.toString());
+        }
+        print.printLnToConsole("<== END DOCUMENT");
     }
 }

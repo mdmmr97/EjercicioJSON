@@ -1,6 +1,8 @@
-package com.kreitek.editor;
+package com.kreitek.editor.print;
 
-public class PrintConsole implements Printer{
+import com.kreitek.editor.print.Printer;
+
+public class PrintConsole implements Printer {
     public void printLnToConsole(String message) { System.out.println(message); }
 
     public void printToConsole(String message) {

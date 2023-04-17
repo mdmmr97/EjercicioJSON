@@ -1,6 +1,8 @@
 package com.kreitek.editor;
 
 import com.kreitek.editor.commands.CommandFactory;
+import com.kreitek.editor.print.PrintConsole;
+import com.kreitek.editor.print.Printer;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -20,7 +22,6 @@ public class ConsoleEditor implements Editor {
     private ArrayList<String> documentLines = new ArrayList<String>();
     private String format;
     private Printer print = new PrintConsole();
-    public ConsoleEditor(String format) {this.format = format;}
 
     @Override
     public void run() {
@@ -43,17 +44,13 @@ public class ConsoleEditor implements Editor {
     private void showDocumentLines(ArrayList<String> textLines) {
         if (textLines.size() > 0){
             setTextColor(TEXT_YELLOW);
-           /* printLnToConsole("START DOCUMENT ==>");
-            for (int index = 0; index < textLines.size(); index++) {
-                StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.append("[");
-                stringBuilder.append(index);
-                stringBuilder.append("] ");
-                stringBuilder.append(textLines.get(index));
-                printLnToConsole(stringBuilder.toString());
+            try {
+                PrintFormat printformat = new PrintFormat(documentLines);
+                printformat.printText();
+            } catch (FormatException e) {
+                throw new RuntimeException(e);
             }
-            printLnToConsole("<== END DOCUMENT");
-            */setTextColor(TEXT_RESET);
+            setTextColor(TEXT_RESET);
         }
     }
 
